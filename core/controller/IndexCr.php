@@ -12,4 +12,13 @@ class IndexCr extends controller
         return $this->showView('start');
     }
 
+    public function addUser(){
+        $this->viewParam['layout'] = false;
+
+        return $this->showView('error_ans',[
+            'errors' => [],
+        ]);
+//        return $this->showView('success');
+    }
+
 }

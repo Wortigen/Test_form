@@ -8,6 +8,7 @@ return [
     'js' => [
 //        'js/bootstrap.min.js',
 //        'js/bootstrap.bundle.min.js',
+        'js/jquery.js',
         'js/main.js',
     ],
     'Resource' => [
