@@ -2,10 +2,13 @@
 
 return [
     'css' => [
+        'css/bootstrap.min.css',
         'css/main.css'
     ],
     'js' => [
-
+//        'js/bootstrap.min.js',
+//        'js/bootstrap.bundle.min.js',
+        'js/main.js',
     ],
     'Resource' => [
         'fileSave' => [

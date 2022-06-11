@@ -4,7 +4,7 @@
     <?= $this->head(); ?>
 </head>
 <body>
-<div class="wrapper">
+<div class="wrapper d-md-flex">
     <?= $content; ?>
 </div>
 <?= $this->footer(); ?>
