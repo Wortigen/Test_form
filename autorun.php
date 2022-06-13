@@ -11,6 +11,15 @@ foreach ($path_dynamic as $item){
     }
 }
 
+$path_dynamic = __DIR__ .'/lb/model';
+$path_dynamic = scandir($path_dynamic);
+
+foreach ($path_dynamic as $item){
+    if(strpos($item,'.php') != null){
+        include  __DIR__ . '/lb/model/'.$item;
+    }
+}
+
 $path_dynamic = __DIR__ .'/core/controller';
 $path_dynamic = scandir($path_dynamic);
 

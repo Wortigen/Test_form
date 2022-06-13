@@ -11,13 +11,12 @@ return [
         'js/jquery.js',
         'js/main.js',
     ],
-    'Resource' => [
+    'resources' => [
         'fileSave' => [
             'path' => '/resources',
             'table' => '/table',
             'savePath' => '/member',
-            'tableType' => 'php',
-            'saveType' => 'csv',
+            'exist' => 'always',
         ],
     ],
     'log' => [

@@ -3,10 +3,11 @@ $(document).ready(function (){
        e.preventDefault();
 
        if(validate($('#formSend .row'))){
+           console.log($('form').serializeArray());
            $.ajax({
                url: '/add_user',
                type: 'post',
-               data: $(this).serialize(),
+               data: $('form').serializeArray(),
                success: function( data, textStatus, jQxhr ){
                    console.log('success');
                    console.log(data);
