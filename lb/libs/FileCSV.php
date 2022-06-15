@@ -59,18 +59,19 @@ class FileCSV
             $this->openFile("r");
 
             $f = true;
-
-            while($data = fgetcsv($this->File, null, ",") !== false){
+            $data = fgetcsv($this->File,1000);
+            while(!empty($data)){
                 if($f == true){
                     $this->array_column = $data;
                     $f = false;
                 } else{
-                    $this->array_values[] =  $data;
+                    if(!empty($data)) {
+                        $this->array_values[] = $data;
+                    }
                 }
+                $data = fgetcsv($this->File,1000);
             }
-
             $this->closeFile();
-
         }
     }
 
@@ -91,7 +92,17 @@ class FileCSV
     }
 
     public function filter_array($filter = []){
-
+        $column = array_flip($this->array_column);
+        $this->array_filter = [];
+        foreach($this->array_values as $record){
+            $isAdd = false;
+            foreach ($filter as $key => $search){
+                if($record[$column[$key]] == $search && $isAdd == false){
+                    $this->array_filter[] = $record;
+                    $isAdd = true;
+                }
+            }
+        }
     }
 
     private function SaveUpload(){

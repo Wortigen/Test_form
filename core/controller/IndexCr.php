@@ -19,17 +19,18 @@ class IndexCr extends controller
         if($_POST){
           $user = new User();
           $user->uploadData($_POST);
-
+          $user->name .= ' ' . $_POST['surname'];
           if($_POST['pass'] == $_POST['repass']){
               $user->password = $_POST['pass'];
-              $user->id = 0;
               if($user->save()) {
                   return $this->showView('success');
               } else {
                   $res_error = $user->errors;
               }
           }else{
-              $res_error[] = 'Пароли не совпадают';
+              $user->CheckValidate();
+              $res_error = $user->errors;
+              array_push($res_error,'Пароли не совпадают');
           }
 
         } else {

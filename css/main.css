@@ -13,8 +13,26 @@ body{
     background: #ffffff;
     padding: 15px;
     margin: auto;
+    flex-direction: column;
 }
 
 .row{
     margin: 12px 0px;
+}
+
+.head{
+    justify-content: center;
+    matgin: 0px;
+}
+
+.head h3{
+    margin: auto;
+}
+
+.wts_hide{
+    display: none!important;
+}
+
+.server_answer{
+    display: none;
 }

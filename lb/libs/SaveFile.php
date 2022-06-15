@@ -71,18 +71,50 @@ class SaveFile
 
     private function validate(){
         $result = true;
-//        $this->attachFile();
-//        $result = ($this->fileLoad())? true : false;
-//        if($result) {
-//            $this->file->readFile();
-//            echo '<pre>'.print_r($this->file->get_rows(), true).'</pre>';
-//            die():
-//            foreach ($this->fields as $key => $attr) {
-//
-//            }
-//        } else {
-//            $result = false;
-//        }
+        $this->attachFile();
+        $result = ($this->fileLoad())? true : false;
+        if($result) {
+            $this->file->readFile();
+            foreach ($this->fields as $key => $attr) {
+                switch($attr['type']){
+                    case 'int':
+                        if(isset($attr['value']) && $attr['value'] == '++'){
+                            $this->{$key} = $this->file-> get_count() + 1;
+                        }
+                        if(isset($attr['require']) && empty($this->{$key})){
+                            $this->errors[] = $key .' field must not empty';
+                            $result = false;
+                        }
+                        break;
+                    case 'string':
+                        if(isset($attr['max']) && strlen($this->{$key}) > $attr['max']){
+                            $this->errors[] = $key .' field value to long';
+                            $result = false;
+                        }
+                        $this->file->filter_array([
+                            $key => $this->{$key},
+                        ]);
+                        if(isset($attr['uniquer']) && $this->file->get_filter_count()> 0){
+                            $this->errors[] = $key .' value exist in system';
+                            $result = false;
+                        }
+                        if(isset($attr['value']) && $attr['value'] == 'mail'){
+                            if(!filter_var($this->{$key}, FILTER_VALIDATE_EMAIL)){
+                                $this->errors[] = $key .' value is not e-mail';
+                                $result = false;
+                            }
+                        }
+                        if(isset($attr['require']) && empty($this->{$key})){
+                            $this->errors[] = $key .' field must not empty';
+                            $result = false;
+                        }
+                        break;
+                    default:break;
+                }
+            }
+        } else {
+            $result = false;
+        }
 
         $result = $this->BeforeAction($result);
         return $result;

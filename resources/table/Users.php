@@ -13,7 +13,7 @@
         ],
         'mail' => [
             'type' => 'string',
-            'validate' => 'mail',
+            'value' => 'mail',
             'require' => true,
             'uniquer' => true,
         ],
